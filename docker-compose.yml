@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  postgresql:
+    image: postgres
+    container_name: 'postgresql'
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_PASSWORD: "root1"
+      POSTGRES_USER: "postgres"
+
+  app: ## nome do serviço
+    container_name: api
+    build: . ## localização do dockerfile
+    command: yarn start ## comando a executar
+    ports:
+      - "3333:3333" ## redirecionamento de porta quando chegar alguma requisição na porta 3000 chama o container na porta 3000
+    volumes:
+      - .:/usr/app
+
